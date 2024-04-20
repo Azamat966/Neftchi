@@ -1,4 +1,4 @@
-package com.example.neftchi.model;
+package com.example.neftchi.model.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

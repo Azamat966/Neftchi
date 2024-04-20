@@ -1,6 +1,6 @@
 package com.example.neftchi.dto.response;
 
-import com.example.neftchi.model.Role;
+import com.example.neftchi.model.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

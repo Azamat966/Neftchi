@@ -1,5 +1,6 @@
 package com.example.neftchi.model;
 
+import com.example.neftchi.model.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 

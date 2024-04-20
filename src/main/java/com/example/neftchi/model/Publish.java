@@ -1,13 +1,11 @@
 package com.example.neftchi.model;
 
+import com.example.neftchi.model.enums.Language;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -21,5 +19,6 @@ public class Publish {
     private String name;
     private String add_link;
     private String category;
-    private String languache;
+    @Enumerated(EnumType.STRING)
+    private Language language;
 }

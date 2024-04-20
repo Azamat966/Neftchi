@@ -1,5 +1,6 @@
 package com.example.neftchi.model;
 
+import com.example.neftchi.model.enums.Language;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +21,8 @@ public class CreateNews {
     private String create_pdf;
     private String create_video_YouTobe;
     private String name;
-    private String language;
+    @Enumerated(EnumType.STRING)
+    private Language language;
     private String descriptions;
 
     @OneToOne
