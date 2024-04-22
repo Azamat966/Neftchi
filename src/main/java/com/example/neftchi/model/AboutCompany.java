@@ -19,5 +19,5 @@ public class AboutCompany {
     private Long id;
     private String tittle;
     private String descriptions;
-    private String image;
+    private String video;
 }
