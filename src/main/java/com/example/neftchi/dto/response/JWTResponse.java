@@ -16,6 +16,6 @@ public class JWTResponse {
     private String token;
     private String message;
 
-    public JWTResponse(String email, String token, String azamat, Role role) {
+    public JWTResponse(String email, String token, String kairat, Role role) {
     }
 }
