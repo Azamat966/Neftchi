@@ -1,13 +1,12 @@
 package com.example.neftchi;
 
-import com.example.neftchi.model.User;
-import com.example.neftchi.model.enums.Role;
-import com.example.neftchi.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import com.example.neftchi.model.AboutCompany;
 import com.example.neftchi.model.MenuPage;
+import com.example.neftchi.model.User;
+import com.example.neftchi.model.enums.Role;
 import com.example.neftchi.repository.AboutCompanyRepository;
 import com.example.neftchi.repository.MenuPageRepository;
+import com.example.neftchi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
 
-@RequiredArgsConstructor
 @SpringBootApplication
 @RequiredArgsConstructor
 public class NeftchiApplication {
