@@ -1,23 +1,21 @@
-package com.example.neftchi.model;
+package com.example.neftchi.dto.response;
 
 import com.example.neftchi.model.enums.Language;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
-public class Partners {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@AllArgsConstructor
+@Builder
+public class PartnerResponce {
     private Long id;
     private String image;
     private String tittle;
-    @Enumerated(EnumType.STRING)
     private Language language;
     private String category;
     private String descriptions;
