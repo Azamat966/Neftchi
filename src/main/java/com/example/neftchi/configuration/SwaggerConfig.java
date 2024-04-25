@@ -31,4 +31,5 @@ public class SwaggerConfig {
                 .scheme( "Bearer" );
     }
 
+
 }
