@@ -1,12 +1,6 @@
 package com.example.neftchi.service;
 
 import com.example.neftchi.dto.response.EmployeResponse;
-import com.example.neftchi.dto.response.MiniPartnersRespons;
-import com.example.neftchi.model.AddEmployee;
-import com.example.neftchi.model.MiniPartners;
-import com.example.neftchi.model.enums.Language;
-import com.example.neftchi.repository.AddEmployeeRepository;
-import com.example.neftchi.repository.MiniPartnersRepository;
 import com.example.neftchi.dto.response.EmployeeResponse;
 import com.example.neftchi.model.AddEmployee;
 import com.example.neftchi.model.enums.Language;
@@ -15,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,8 +40,6 @@ public class AddEmployeeService {
     public void deleteById(Long id) {
         addEmployeeRepository.deleteById(id);
     }
-}
-    private final AddEmployeeRepository addEmployeeRepository;
 
     public EmployeeResponse update(Long id,
                                    String name_lastname,

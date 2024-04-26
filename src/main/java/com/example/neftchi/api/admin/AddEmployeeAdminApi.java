@@ -1,14 +1,9 @@
 package com.example.neftchi.api.admin;
 
+import com.example.neftchi.dto.response.EmployeResponse;
 import com.example.neftchi.dto.response.EmployeeResponse;
 import com.example.neftchi.model.AddEmployee;
 import com.example.neftchi.model.enums.Language;
-import com.example.neftchi.service.AddEmployeeService;
-import com.example.neftchi.dto.response.AboutResponse;
-import com.example.neftchi.dto.response.EmployeResponse;
-import com.example.neftchi.model.AddEmployee;
-import com.example.neftchi.model.enums.Language;
-import com.example.neftchi.service.AboutCompanyService;
 import com.example.neftchi.service.AddEmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,9 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -95,15 +87,15 @@ public class AddEmployeeAdminApi {
         response.setDescription(addEmployee.getDescription());
         return response;
     }
-}
-    private final AddEmployeeService addEmployeeService;
+
     @PostMapping("/admin/save/")
-    public EmployeResponse updateDescription(@RequestParam String  name_lastname,
-                                             @RequestParam  String position,
+    public EmployeResponse updateDescription(@RequestParam String name_lastname,
+                                             @RequestParam String position,
                                              @RequestParam Language language,
                                              @RequestParam String description) {
         return addEmployeeService.save(name_lastname, position, language, description);
     }
+
     @DeleteMapping("/save/delete/{id}")
     public String deleteById(@PathVariable Long id) {
         addEmployeeService.deleteById(id);
