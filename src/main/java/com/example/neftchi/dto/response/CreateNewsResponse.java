@@ -1,32 +1,28 @@
-package com.example.neftchi.model;
+package com.example.neftchi.dto.response;
 
 import com.example.neftchi.model.enums.Language;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class CreateNews {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class CreateNewsResponse {
     private Long id;
     private String image;
-    @ElementCollection
-    private List<String> create_image;
+    private List <String > create_image;
     private String create_video;
     private String create_pdf;
     private String create_video_YouTobe;
     private String name;
+    private String category;
     @Enumerated(EnumType.STRING)
     private Language language;
     private String descriptions;
-
-    @ManyToOne
-    private Category category;
 }
