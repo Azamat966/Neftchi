@@ -1,12 +1,15 @@
 package com.example.neftchi.api.admin;
 
 import com.example.neftchi.dto.response.CreateNewsResponse;
+import com.example.neftchi.model.CreateNews;
 import com.example.neftchi.model.enums.Language;
+import com.example.neftchi.repository.CreateNewsRepository;
 import com.example.neftchi.service.CreateNewsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +25,7 @@ import java.io.IOException;
 @RequestMapping("api/v1/create/news/admin")
 public class CreateNewsAdminApi {
     private final CreateNewsService service;
-
+    private final CreateNewsRepository createNewsRepository;
     @PostMapping("/admin/save/create_News")
     public CreateNewsResponse save(@RequestParam List<String> create_Image,
                                    @RequestParam String creat_Video,
@@ -73,8 +76,6 @@ public class CreateNewsAdminApi {
         service.deleteByID(id);
         return "Удалено: " + id;
     }
-    private final CreateNewsRepository createNewsRepository;
-    private final CreateNewsService service;
 
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -85,7 +86,7 @@ public class CreateNewsAdminApi {
                              @RequestParam Language language,
                              @RequestParam("file") MultipartFile file,
                              @RequestParam("create_image") MultipartFile create_image) {
-        service.saveCreateNews(description, create_image, create_video, create_video_YouTobe,language, file);
+        service.saveCreateNews(description, create_image, create_video, create_video_YouTobe, language, file);
         return "Saved";
     }
 
@@ -99,6 +100,7 @@ public class CreateNewsAdminApi {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(resource);
     }
+
     @GetMapping("/image/{id}")
     public ResponseEntity<byte[]> getImage(@PathVariable Long id) throws IOException {
         CreateNews createNews = createNewsRepository.findById(id).orElseThrow();

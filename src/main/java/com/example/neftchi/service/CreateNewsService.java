@@ -23,9 +23,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CreateNewsService {
-   private final   CreateNewsRepository createNewsRepository;
+    private final CreateNewsRepository createNewsRepository;
+
     @Transactional
-    public void saveCreateNews(String description, MultipartFile create_image, String create_video, String create_video_YouTobe, Language language , MultipartFile file) {
+    public void saveCreateNews(String description, MultipartFile create_image, String create_video, String create_video_YouTobe, Language language, MultipartFile file) {
         try {
             CreateNews request = new CreateNews();
             request.setCreate_video(create_video);
@@ -39,7 +40,7 @@ public class CreateNewsService {
             throw new RuntimeException("Failed to upload PDF file", e);
         }
     }
-    private final CreateNewsRepository createNewsRepository;
+
     private final CategoryRepository categoryRepository;
 
     public CreateNewsResponse save(List<String> create_Image,
@@ -53,7 +54,6 @@ public class CreateNewsService {
         CreateNews menuPage = new CreateNews();
         Category category = categoryRepository.findById(id).orElseThrow();
         menuPage.setCreate_image(create_Image);
-        menuPage.setCreate_pdf(creat_pdf);
         menuPage.setCreate_video(creat_Video);
         menuPage.setCreate_video_YouTobe(creat_Video_Youtube);
         menuPage.setCategory(category);
@@ -65,7 +65,6 @@ public class CreateNewsService {
                 .create_image(menuPage.getCreate_image())
                 .id(menuPage.getId())
                 .image(menuPage.getImage())
-                .create_pdf(menuPage.getCreate_pdf())
                 .create_video(menuPage.getCreate_video())
                 .create_video_YouTobe(menuPage.getCreate_video_YouTobe())
                 .descriptions(menuPage.getDescriptions())
@@ -86,7 +85,6 @@ public class CreateNewsService {
                 .orElseThrow(() -> new RuntimeException("Menu page not found with ID: " + id));
 
         menuPage.setImage(image);
-        menuPage.setCreate_pdf(creat_pdf);
         menuPage.setCreate_image(creat_image);
         menuPage.setCreate_video(creat_video);
         menuPage.setCreate_video_YouTobe(creat_video_youtube);
@@ -100,7 +98,6 @@ public class CreateNewsService {
                 .create_image(menuPage.getCreate_image())
                 .image(menuPage.getImage())
                 .category(menuPage.getCategory().getCategory())
-                .create_pdf(menuPage.getCreate_pdf())
                 .descriptions(menuPage.getDescriptions())
                 .create_video_YouTobe(menuPage.getCreate_video_YouTobe())
                 .language(menuPage.getLanguage())
