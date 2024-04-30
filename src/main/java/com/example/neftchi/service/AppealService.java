@@ -38,13 +38,4 @@ public class AppealService {
             throw new RuntimeException("Failed to upload PDF file", e);
         }
     }
-
-
-
-
-
-    public ByteArrayResource getPdfById(Long id) throws IOException {
-        Appeal appeal = appealRepository.findById(id).orElseThrow();
-        return new ByteArrayResource(appeal.getData());
-    }
 }

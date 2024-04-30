@@ -1,12 +1,17 @@
 package com.example.neftchi.service;
 
 import com.example.neftchi.dto.response.PartnerResponce;
+import com.example.neftchi.model.Adminstration;
 import com.example.neftchi.model.Partners;
 import com.example.neftchi.model.enums.Language;
 import com.example.neftchi.repository.PartnersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.Part;
+import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,30 +20,21 @@ import java.util.List;
 public class PartnersService {
     private final PartnersRepository partnersRepository;
 
-    public PartnerResponce save(String tittle,
-                                String image,
-                                String link,
-                                Language language,
-                                String category,
-                                String descriptions) {
-        Partners partners = new Partners();
-        partners.setTittle(tittle);
-        partners.setImage(image);
-        partners.setLink(link);
-        partners.setLanguage(language);
-        partners.setCategory(category);
-        partners.setDescriptions(descriptions);
-        partnersRepository.save(partners);
-        return PartnerResponce.builder()
-                .id(partners.getId())
-                .tittle(partners.getTittle())
-                .image(partners.getImage())
-                .link(partners.getLink())
-                .language(partners.getLanguage())
-                .category(partners.getCategory())
-                .descriptions(partners.getDescriptions())
-                .build();
-
+    @Transactional
+    public void savePartners(String title, String descriptions,String category,String link, Language language, MultipartFile file) {
+        try {
+            Partners request = new Partners();
+            request.setTittle(title);
+            request.setDescriptions(descriptions);
+            request.setLanguage(language);
+            request.setCategory(category);
+            request.setLink(link);
+            request.setImage(file.getOriginalFilename());
+            request.setData(file.getBytes());
+            partnersRepository.save(request);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload PDF file", e);
+        }
     }
 
     public PartnerResponce update(Long id,
