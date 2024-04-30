@@ -19,4 +19,5 @@ public class Regulations {
     private Long id;
     private String regulations;
     private String file_pdf;
+    private byte[] data;
 }

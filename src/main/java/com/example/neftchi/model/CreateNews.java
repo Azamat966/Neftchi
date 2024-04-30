@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,15 +17,17 @@ public class CreateNews {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String image;
-    private String create_image;
+    @ElementCollection
+    private List<String> create_image;
     private String create_video;
-    private String create_pdf;
+    private String file;
+    private byte[] data;
     private String create_video_YouTobe;
     private String name;
     @Enumerated(EnumType.STRING)
     private Language language;
     private String descriptions;
 
-    @OneToOne
+    @ManyToOne
     private Category category;
 }

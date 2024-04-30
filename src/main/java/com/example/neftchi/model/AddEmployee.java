@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -20,4 +21,5 @@ public class AddEmployee {
     @Enumerated(EnumType.STRING)
     private Language language;
     private String description;
+    private LocalDateTime localDateTime;
 }
