@@ -20,4 +20,5 @@ public class Services {
     private String tittle;
     private String image;
     private String link;
+    private byte[] data;
 }

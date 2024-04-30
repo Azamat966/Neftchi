@@ -16,6 +16,7 @@ public class Publish {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String image;
+    private byte[] data;
     private String name;
     private String add_link;
     private String category;

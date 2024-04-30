@@ -20,7 +20,8 @@ public class CreateNews {
     @ElementCollection
     private List<String> create_image;
     private String create_video;
-    private String create_pdf;
+    private String file;
+    private byte[] data;
     private String create_video_YouTobe;
     private String name;
     @Enumerated(EnumType.STRING)
