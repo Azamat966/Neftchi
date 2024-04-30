@@ -40,6 +40,7 @@ public class ServiceAdminApi {
     public List<ServiceResponse> getAll() {
         return service.findAll();
     }
+
     @DeleteMapping("/menuPage/delete/{id}")
     public String deleteById(@PathVariable Long id) {
         service.deleteByID(id);
