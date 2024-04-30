@@ -32,7 +32,7 @@ public class AppealAdminApi {
                              @RequestParam String lastName,
                              @RequestParam String manyDescription,
                              @RequestParam String numberTel,
-                             @RequestParam("file") MultipartFile file) {
+                             @RequestParam("file_pdf") MultipartFile file) {
         appealService.saveAppeal(description, email, lastName, manyDescription, numberTel, file);
         return "Saved";
     }

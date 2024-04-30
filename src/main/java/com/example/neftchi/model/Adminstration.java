@@ -20,4 +20,5 @@ public class Adminstration {
     @Enumerated(EnumType.STRING)
     private Language language;
     private String image;
+    private byte[] data;
 }

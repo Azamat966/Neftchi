@@ -1,11 +1,16 @@
 package com.example.neftchi.service;
 
 import com.example.neftchi.dto.response.ServiceResponse;
+import com.example.neftchi.model.Publish;
 import com.example.neftchi.model.Services;
+import com.example.neftchi.model.enums.Language;
 import com.example.neftchi.repository.ServiceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,21 +19,19 @@ import java.util.List;
 public class ServicesService {
     private final ServiceRepository serviceRepository;
 
-    public ServiceResponse save(String tittle,
-                                String image,
-                                String link) {
-        Services menuPage = new Services();
-        menuPage.setTittle(tittle);
-        menuPage.setImage(image);
-        menuPage.setLink(link);
-        serviceRepository.save(menuPage);
-        return ServiceResponse.builder()
-                .id(menuPage.getId())
-                .tittle(menuPage.getTittle())
-                .image(menuPage.getImage())
-                .link(menuPage.getLink())
-                .build();
 
+    @Transactional
+    public void saveServices( String title, String link,  MultipartFile file) {
+        try {
+            Services request = new Services();
+            request.setLink(link);
+            request.setTittle(title);
+            request.setImage(file.getOriginalFilename());
+            request.setData(file.getBytes());
+            serviceRepository.save(request);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload PDF file", e);
+        }
     }
 
     public ServiceResponse findById(Long id) {
