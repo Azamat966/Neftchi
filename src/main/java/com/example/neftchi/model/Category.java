@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,5 +26,9 @@ public class Category {
     private String color;
     private String category;
     private int importance_number;
+    private String importanke_number;
+    @OneToMany(mappedBy = "category")
+    private List<CreateNews> createNews;
+}
 
 }

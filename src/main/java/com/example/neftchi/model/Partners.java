@@ -17,8 +17,10 @@ public class Partners {
     private Long id;
     private String image;
     private String tittle;
+    private byte[] data;
     @Enumerated(EnumType.STRING)
     private Language language;
     private String category;
     private String descriptions;
+    private String link;
 }
