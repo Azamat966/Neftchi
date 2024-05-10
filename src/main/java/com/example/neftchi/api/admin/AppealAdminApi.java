@@ -20,31 +20,5 @@ import java.io.IOException;
 @RequestMapping("api/v1/appeal/admin")
 @PreAuthorize("hasAnyAuthority('ADMIN')")
 public class AppealAdminApi {
-    private final AppealRepository appealRepository;
-    private final AppealService appealService;
 
-
-    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @ApiOperation(value = "Upload a file")
-    @Transactional
-    public String saveAppeal(@RequestParam String description,
-                             @RequestParam String email,
-                             @RequestParam String lastName,
-                             @RequestParam String manyDescription,
-                             @RequestParam String numberTel,
-                             @RequestParam("file_pdf") MultipartFile file) {
-        appealService.saveAppeal(description, email, lastName, manyDescription, numberTel, file);
-        return "Saved";
-    }
-
-
-    @GetMapping("/pdf/{id}")
-    public ResponseEntity<ByteArrayResource> getPdf(@PathVariable Long id) throws IOException {
-        Appeal appeal = appealRepository.findById(id).orElseThrow();
-        ByteArrayResource resource = new ByteArrayResource(appeal.getData());
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(resource);
-    }
 }
