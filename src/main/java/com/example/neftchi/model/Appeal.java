@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -28,7 +29,8 @@ public class Appeal {
     private Status status;
     private String file;
     private byte[] data;
+    private LocalDateTime localDateTime;
 
-    @OneToOne
+    @OneToOne(mappedBy = "appeal")
     private AppealAnswer appealAnswer;
 }
