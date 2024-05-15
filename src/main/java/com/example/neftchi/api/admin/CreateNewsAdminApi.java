@@ -148,10 +148,7 @@ public class CreateNewsAdminApi {
         return service.findAllByCategory(category);
     }
 
-    @GetMapping("/orderedByImportance")
-    public List<CreateNews> getAllNewsOrderedByImportance() {
-        return service.getAllNewsOrderedByImportance();
-    }
+
 }
 
 
