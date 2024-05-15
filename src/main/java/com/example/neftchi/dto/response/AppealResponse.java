@@ -13,6 +13,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Builder
 public class AppealResponse {
+    private Long id;
     private String name_lastname;
     private String numberTel;
     private String manyDescription;
@@ -20,5 +21,5 @@ public class AppealResponse {
     private String email;
     private String status;
     private String file;
-
+    private String answer;
 }
