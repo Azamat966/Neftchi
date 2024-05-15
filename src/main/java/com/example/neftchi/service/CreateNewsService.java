@@ -1,13 +1,11 @@
 package com.example.neftchi.service;
 
-import com.example.neftchi.model.CreateNews;
+import com.example.neftchi.model.*;
 import com.example.neftchi.model.enums.Language;
 import com.example.neftchi.repository.CreateNewsRepository;
 import com.example.neftchi.dto.response.CreateNewsResponse;
 import com.example.neftchi.dto.response.ServiceResponse;
-import com.example.neftchi.model.Category;
 import com.example.neftchi.model.CreateNews;
-import com.example.neftchi.model.Services;
 import com.example.neftchi.model.enums.Language;
 import com.example.neftchi.repository.CategoryRepository;
 import com.example.neftchi.repository.CreateNewsRepository;
@@ -18,7 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.IOException;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +36,7 @@ public class CreateNewsService {
             request.setLanguage(language);
             request.setFile(file.getOriginalFilename());
             request.setData(file.getBytes());
+            request.setDataCreated(LocalDateTime.now());
             createNewsRepository.save(request);
         } catch (IOException e) {
             throw new RuntimeException("Failed to upload PDF file", e);
@@ -122,4 +124,53 @@ public class CreateNewsService {
         createNewsRepository.deleteById(id);
     }
 
-}
+    public List<CreateNews> newsrepository(int count) {
+        List<CreateNews> list = new ArrayList<>();
+        int a = 0;
+        for (CreateNews createNews : createNewsRepository.findAllByOrderByNameAsc()) {
+            if (a == count)
+                return list;
+            list.add(createNews);
+            a++;
+        }
+        return list;
+    }
+
+
+    public List<CreateNews> createNewsrepository(int count1) {
+        List<CreateNews> list = new ArrayList<>();
+        int a = 0;
+        for (CreateNews createNews : createNewsRepository.findAllByOrderByNameDesc()) {
+            if (a == count1)
+                return list;
+            list.add(createNews);
+            a++;
+        }
+        return list;
+    }
+
+
+    public List<CreateNewsResponse> findAllByCategory(String category) {
+        List<CreateNews> newsList = createNewsRepository.findAllByCategory(category);
+        List<CreateNewsResponse> response1 = newsList.stream()
+                .map(news -> {
+                    CreateNewsResponse response = new CreateNewsResponse();
+                    response.setImage(news.getImage());
+                    response.setId(news.getId());
+                    response.setCreate_pdf(news.getCreate_pdf());
+                    response.setCategory(news.getCategory().getCategory());
+                    response.setCreate_video(news.getCreate_video());
+                    response.setCreate_video_YouTobe(news.getCreate_video_YouTobe());
+                    response.setCreate_image(news.getCreate_image());
+                    response.setName(news.getName());
+                    response.setDescriptions(news.getDescriptions());
+                    response.setLanguage(news.getLanguage());
+                    return response;
+                })
+                .collect(Collectors.toList());
+        return response1;
+    }
+
+
+    }
+

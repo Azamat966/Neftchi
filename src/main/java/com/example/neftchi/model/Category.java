@@ -30,5 +30,3 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<CreateNews> createNews;
 }
-
-}

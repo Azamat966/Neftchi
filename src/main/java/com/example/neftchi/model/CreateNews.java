@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -20,6 +21,7 @@ public class CreateNews {
     @ElementCollection
     private List<String> create_image;
     private String create_video;
+    private String create_pdf;
     private String file;
     private byte[] data;
     private String create_video_YouTobe;
@@ -27,6 +29,8 @@ public class CreateNews {
     @Enumerated(EnumType.STRING)
     private Language language;
     private String descriptions;
+    private LocalDateTime dataCreated;
+    private String name_lastname;
 
     @ManyToOne
     private Category category;
